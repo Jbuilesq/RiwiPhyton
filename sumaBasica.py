@@ -1,0 +1,4 @@
+num1=int (input("ingrese un el primer numero: "))
+num2=int (input("ingrese un el segundo numero: "))
+
+print ("El resultado es: "+ str(num1+num2))

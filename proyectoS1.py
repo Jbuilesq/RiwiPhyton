@@ -55,8 +55,7 @@ valorCompraPorcentaje= (porcentajeDescuento/100)*valorCompra #calculo el descuen
 valorTotal=valorCompra-valorCompraPorcentaje #calculo el valor total de la compra con descuento
 
 #imprimo los valores
-print("Valor: $",valorCompra)
-print("Valor Descuento: $",valorCompraPorcentaje)
-print("Valor a pagar: $",valorTotal) 
+print(f"Valor: ${valorCompra:.2f}")
+print(f"Valor Descuento: ${valorCompraPorcentaje:.2f}")
+print(f"Valor a pagar: ${valorTotal:.2f}") 
 
-#las dos decimales se muestran al momento de imprimir porque el tipo de dato que se imprime es float

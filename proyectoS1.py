@@ -1,3 +1,7 @@
+#calculadora de productos
+#Este programa calcula el valor total de una compra, aplicando un descuento si corresponde.
+#El programa solicita al usuario el nombre del producto, el precio, la cantidad y el porcentaje de descuento.
+#El programa valida que los datos ingresados sean correctos y muestra el resultado final.
 
 print("Calculadora de productos: ") #Imprimir un titulo
 

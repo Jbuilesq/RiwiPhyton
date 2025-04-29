@@ -17,7 +17,7 @@ while nombreProducto == "": #hacemos un while si no ingresan el nombre del produ
 while True: #hacemos un bucle hasta que se ingrese un valor correcto en el precio del producto  
     try: #hacemos un try para que no salga un error si se ingresan letras 
         valorProducto= float(input("Por favor ingrese el precio del producto: $"))
-        while valorProducto <= 0  : #hacemos un bucle para validar que no ingrese un valor negativo
+        while valorProducto < 0  : #hacemos un bucle para validar que no ingrese un valor negativo
             valorProducto= float(input("Error: Por favor ingrese el precio del producto: $"))
         break #El break se usa para romper el ciclo del while true
     except ValueError : #Esta lina se ejecuta si en el try se produce un error del tipo valueError (se ejecuta cuando la entrada del usuario no se puede convertir a float)

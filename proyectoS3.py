@@ -27,8 +27,9 @@ def valueValidation (cantValue):
 #def productValidation ():    para validar los productos 
    
 def addProduct ():
-    print("-"*10,"Añadir producto","-"*10,"\n")
+    
     while True:
+        
         productName = input("Ingrese el nombre del producto: ").strip()
         while productName == "":
             productName = input("Error: Ingrese el nombre del producto: ").strip()
@@ -44,6 +45,7 @@ def addProduct ():
             break
 
 def searchProducts ():
+    
     search = input("Ingrese el producto que desea consultar: ").strip()
     while search == "":
         search = input("Error: El campo no puede estar vacio. Ingrese el producto que desea consultar: ").strip()
@@ -51,7 +53,30 @@ def searchProducts ():
         if product["product"] == search:
             print(f"El producto {search} se ha encontrado: ")
             print(f"Cantidad del producto {search}: {product["quantity"]}")
-            print(f"Precio del producto {search}: ${product["price"]}")
+            print(f"Precio del producto {search}: ${product["price"]}\n")
+            
+            break
+
+def changeValueProducts ():
+    search = input("Ingrese el producto que desea Modificar: ").strip()
+    while search == "":
+        search = input("Error: El campo no puede estar vacio. Ingrese el producto que desea Modificar: ").strip()
+    for product in products:
+        if product["product"] == search:
+            print(f"El producto {search} se ha encontrado: ")
+            # print(f"Cantidad del producto {search}: {product["quantity"]}")
+            # print(f"Precio del producto {search}: ${product["price"]}\n")
+            product["price"] = valueValidation("Ingrese el nuevo precio del producto: ")
+            break
+
+def removeProduct ():
+    search = input("Ingrese el producto que desea Eliminar: ").strip()
+    while search == "":
+        search = input("Error: El campo no puede estar vacio. Ingrese el producto que desea Eliminar: ").strip()
+    for product in products:
+        if product["product"] == search:
+            print(f"El producto {search} se ha encontrado: ")
+            products.remove(product)
             break
 
 def main ():
@@ -62,19 +87,23 @@ def main ():
         print("---------------------------------------------\n")
         option = requestOption()
         if option == 1:
+            print("-"*10,"Añadir nuevo producto","-"*10,"\n")
             addProduct()
+            print (products)
         elif option == 2:
+            print("-"*10,"Busqueda de producto","-"*10,"\n")
             searchProducts()
         elif option == 3:
-            print("actualizar precio producto")
+            print("-"*10,"Modificación de producto","-"*10,"\n")
+            changeValueProducts()
         elif option == 4:
-            print("Eliminar Producto")
+            removeProduct()
         elif option == 5:
             print("calcular valor inventario")
         else:
             break
-        
-        
+
+#enviar el parametro option de el main para ejecutar otras tareas en otra clase 
 
 main ()
 print(products)

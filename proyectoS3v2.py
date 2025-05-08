@@ -1,8 +1,10 @@
-# Inventario de productos
+# PRODUCTS INVENTORY
 print("="*10,"Inventario de productos","="*10)
 
+#products list is declared global to use on others function
 products = []
 
+#requestOption is a function to validate the input option to menu 
 def requestOption():
     while True:
         try:
@@ -13,7 +15,7 @@ def requestOption():
         except ValueError:
             print("Debe ingresar una opcion numerica: ")
             
-# para validar que los datos de precio y cantidad sean positivos   
+#Value validation is a function to validate quantity and value inputs are numbers and positives 
 def valueValidation (cantValue):
     while True:
         try:
@@ -24,16 +26,16 @@ def valueValidation (cantValue):
         except ValueError:
             print (f"Error: {cantValue} debe ser en numeros.")
             
-   
+#This function add procduts to products list 
 def addProduct ():
     while True:
         productName = input("Ingrese el nombre del producto: ").strip()
         while productName == "":
             productName = input("Error: Ingrese el nombre del producto: ").strip()
         productQuantity = valueValidation("Cantidad del producto: ")
-        productPrice = valueValidation ("Precio del producto en UND: ")
+        productPrice = valueValidation ("Precio del producto en UND: $")
         products.append({"product": productName, "quantity":productQuantity, "price":productPrice})
-        option = input("\nIngrese 1: Para ingresar mas productos. \nIngrese: Cualquier tecla para salir. \n")
+        option = input("\nIngrese 1: Para ingresar mas productos O Ingrese: Cualquier tecla para volver al menu: \n")
         if option == "1":
             print("\n")
             continue
@@ -41,9 +43,9 @@ def addProduct ():
             print ("\n")
             break
 
-
-def iterateProducts (option,iterate):
-    if len(products) == 0:
+# this function search the product if the product is found show the information product (Quantity and price), modify price or remove product from products list. 
+def iterateProducts (option,iterate): # receive two variables: option(to select what i whant to do whit the product) and iterate(to display interactive messages)
+    if len(products) == 0: #here validate if list is empty
         print("Aun no se ha ingresado ningun producto al inventario, por favor añada productos.\n")
     else:
         iterateProduct = input(f"Ingrese el producto que desea {iterate}: ").strip()
@@ -52,29 +54,38 @@ def iterateProducts (option,iterate):
         for product in products:
             if product["product"] == iterateProduct:
                 print(f"El producto {iterateProduct} se ha encontrado: ")
-                if option == 2:
+                if option == 2: # here we show price and quintity of product 
                     print(f"Cantidad del producto {iterateProduct}: {product["quantity"]}")
                     print(f"Precio del producto {iterateProduct}: ${product["price"]}\n")
                     return
-                elif option == 3:
+                elif option == 3:# here we can update the price
                     product["price"] = valueValidation("Ingrese el nuevo precio del producto: $")
                     print("Precio modificado correctamente \n")
                     return
-                else:
-                    products.remove(product)
-                    return
-                #break
+                else: #and here we can remove products from  products list (inventory)
+                    option1 = input(f"Esta seguro que desea eliminar el producto {product["product"]}? \nIngrese 1: Para eliminar o Ingrese: Cualquier tecla para volver al menu:")
+                    if option1 == "1":
+                        products.remove(product)
+                        print(f"El producto {product["product"]} se ha eliminado correctamente.\n")
+                        return
+                    else:
+                        print("No se elimino el producto.\n")
+                        return
         print(f"\n El producto {iterateProduct} no encontrado en el inventario.\n")
 
+#here we multiply he price about each product by its quantity 
 multiplyValueProduct = lambda x , y : x*y
 
+#this function stores the total price of product and calculate the value of inventory
 def valueInventory ():
     valueInventoryByProducts = []
     for product in products:
         valueInventoryByProduct = multiplyValueProduct(product["quantity"],product["price"])
+        print(f"Producto {product["product"]}: Cantidad: {product["quantity"]} UNDS. Precio: ${product["price"]}. Total: {valueInventoryByProduct}")
         valueInventoryByProducts.append(valueInventoryByProduct)
-    print(f"El valor total del inventario es: ${sum(valueInventoryByProducts)}\n")
+    print(f"\nEl valor total del inventario es: ${sum(valueInventoryByProducts)}\n")
 
+# main is a function where the menu is executed
 def main ():
     
     while True:
@@ -100,9 +111,6 @@ def main ():
         else:
             break
     print("\n","-"*13,"Fin del programa","-"*13,"\n")
-#enviar el parametro option de el main para ejecutar otras tareas en otra clase 
 
 main ()
-print(products)
-
-#en cada paso validar si la lista ya contiene valores 
+#print(products)

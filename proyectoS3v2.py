@@ -24,12 +24,9 @@ def valueValidation (cantValue):
         except ValueError:
             print (f"Error: {cantValue} debe ser en numeros.")
             
-#def productValidation ():    para validar los productos 
    
 def addProduct ():
-    
     while True:
-        
         productName = input("Ingrese el nombre del producto: ").strip()
         while productName == "":
             productName = input("Error: Ingrese el nombre del producto: ").strip()
@@ -44,55 +41,39 @@ def addProduct ():
             print ("\n")
             break
 
-# def searchProducts ():
-#     search = input("Ingrese el producto que desea consultar: ").strip()
-#     while search == "":
-#         search = input("Error: El campo no puede estar vacio. Ingrese el producto que desea consultar: ").strip()
-#     for product in products:
-#         if product["product"] == search:
-#             print(f"El producto {search} se ha encontrado: ")
-#             print(f"Cantidad del producto {search}: {product["quantity"]}")
-#             print(f"Precio del producto {search}: ${product["price"]}\n")
-#             break
-
-# def changeValueProducts ():
-#     search = input("Ingrese el producto que desea Modificar: ").strip()
-#     while search == "":
-#         search = input("Error: El campo no puede estar vacio. Ingrese el producto que desea Modificar: ").strip()
-#     for product in products:
-#         if product["product"] == search:
-#             print(f"El producto {search} se ha encontrado: ")
-#             # print(f"Cantidad del producto {search}: {product["quantity"]}")
-#             # print(f"Precio del producto {search}: ${product["price"]}\n")
-#             product["price"] = valueValidation("Ingrese el nuevo precio del producto: ")
-#             break
-
-# def removeProduct ():
-#     search = input("Ingrese el producto que desea Eliminar: ").strip()
-#     while search == "":
-#         search = input("Error: El campo no puede estar vacio. Ingrese el producto que desea Eliminar: ").strip()
-#     for product in products:
-#         if product["product"] == search:
-#             print(f"El producto {search} se ha encontrado: ")
-#             products.remove(product)
-#             break
 
 def iterateProducts (option,iterate):
-    search = input(f"Ingrese el producto que desea {iterate}: ").strip()
-    while search == "":
-        search = input(f"Error: El campo no puede estar vacio. Ingrese el producto que desea {iterate}: ").strip()
+    if len(products) == 0:
+        print("Aun no se ha ingresado ningun producto al inventario, por favor añada productos.\n")
+    else:
+        iterateProduct = input(f"Ingrese el producto que desea {iterate}: ").strip()
+        while iterateProduct == "":
+            iterateProduct = input(f"Error: El campo no puede estar vacio. Ingrese el producto que desea {iterate}: ").strip()
+        for product in products:
+            if product["product"] == iterateProduct:
+                print(f"El producto {iterateProduct} se ha encontrado: ")
+                if option == 2:
+                    print(f"Cantidad del producto {iterateProduct}: {product["quantity"]}")
+                    print(f"Precio del producto {iterateProduct}: ${product["price"]}\n")
+                    return
+                elif option == 3:
+                    product["price"] = valueValidation("Ingrese el nuevo precio del producto: $")
+                    print("Precio modificado correctamente \n")
+                    return
+                else:
+                    products.remove(product)
+                    return
+                #break
+        print(f"\n El producto {iterateProduct} no encontrado en el inventario.\n")
+
+multiplyValueProduct = lambda x , y : x*y
+
+def valueInventory ():
+    valueInventoryByProducts = []
     for product in products:
-        if product["product"] == search:
-            print(f"El producto {search} se ha encontrado: ")
-            if option == 2:
-                print(f"Cantidad del producto {search}: {product["quantity"]}")
-                print(f"Precio del producto {search}: ${product["price"]}\n")
-            elif option == 3:
-                product["price"] = valueValidation("Ingrese el nuevo precio del producto: ")
-                print("Precio modificado correctamente \n")
-            else:
-                products.remove(product)
-            break
+        valueInventoryByProduct = multiplyValueProduct(product["quantity"],product["price"])
+        valueInventoryByProducts.append(valueInventoryByProduct)
+    print(f"El valor total del inventario es: ${sum(valueInventoryByProducts)}\n")
 
 def main ():
     
@@ -112,12 +93,13 @@ def main ():
             print("-"*10,"Modificación de producto","-"*10,"\n")
             iterateProducts(option,"modificar")
         elif option == 4:
+            print("-"*10,"Eliminar producto","-"*10,"\n")
             iterateProducts(option,"eliminar")
         elif option == 5:
-            print("calcular valor inventario")
+            valueInventory()
         else:
             break
-
+    print("\n","-"*13,"Fin del programa","-"*13,"\n")
 #enviar el parametro option de el main para ejecutar otras tareas en otra clase 
 
 main ()

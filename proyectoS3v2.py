@@ -96,7 +96,6 @@ def main ():
         if option == 1:
             print("-"*10,"Añadir nuevo producto","-"*10,"\n")
             addProduct()
-            print (products)
         elif option == 2:
             print("-"*10,"Busqueda de producto","-"*10,"\n")
             iterateProducts(option,"buscar")

@@ -67,15 +67,15 @@ def addProduct ():
 #             product["price"] = valueValidation("Ingrese el nuevo precio del producto: ")
 #             break
 
-# def removeProduct ():
-#     search = input("Ingrese el producto que desea Eliminar: ").strip()
-#     while search == "":
-#         search = input("Error: El campo no puede estar vacio. Ingrese el producto que desea Eliminar: ").strip()
-#     for product in products:
-#         if product["product"] == search:
-#             print(f"El producto {search} se ha encontrado: ")
-#             products.remove(product)
-#             break
+def removeProduct ():
+    search = input("Ingrese el producto que desea Eliminar: ").strip()
+    while search == "":
+        search = input("Error: El campo no puede estar vacio. Ingrese el producto que desea Eliminar: ").strip()
+    for product in products:
+        if product["product"] == search:
+            print(f"El producto {search} se ha encontrado: ")
+            products.remove(product)
+            break
 
 def iterateProducts (option,iterate):
     search = input(f"Ingrese el producto que desea {iterate}: ").strip()

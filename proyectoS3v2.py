@@ -41,6 +41,7 @@ def addProduct ():
         products.append({"product": productName, "quantity":productQuantity, "price":productPrice})
         option = input("\nIngrese 1: Para ingresar mas productos O Ingrese: Cualquier tecla para volver al menu: ")
         if option == "1":
+            print("\n")
             continue
         else:
             break

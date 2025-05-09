@@ -29,18 +29,20 @@ def valueValidation (cantValue):
 #This function add procduts to products list 
 def addProduct ():
     while True:
-        productName = input("Ingrese el nombre del producto: ").strip()
+        productName = input("Ingrese el nombre del producto: ").lower().capitalize().strip()
         while productName == "":
-            productName = input("Error: Ingrese el nombre del producto: ").strip()
+            productName = input("Error: Ingrese el nombre del producto: ").lower().capitalize().strip()
+        for product in products:
+            if product["product"] == productName:
+                print("El producto ya existe\n")
+                return
         productQuantity = valueValidation("Cantidad del producto: ")
         productPrice = valueValidation ("Precio del producto en UND: $")
         products.append({"product": productName, "quantity":productQuantity, "price":productPrice})
-        option = input("\nIngrese 1: Para ingresar mas productos O Ingrese: Cualquier tecla para volver al menu: \n")
+        option = input("\nIngrese 1: Para ingresar mas productos O Ingrese: Cualquier tecla para volver al menu: ")
         if option == "1":
-            print("\n")
             continue
         else:
-            print ("\n")
             break
 
 # this function search the product if the product is found show the information product (Quantity and price), modify price or remove product from products list. 
@@ -48,9 +50,9 @@ def iterateProducts (option,iterate): # receive two variables: option(to select 
     if len(products) == 0: #here validate if list is empty
         print("Aun no se ha ingresado ningun producto al inventario, por favor añada productos.\n")
     else:
-        iterateProduct = input(f"Ingrese el producto que desea {iterate}: ").strip()
+        iterateProduct = input(f"Ingrese el producto que desea {iterate}: ").lower().capitalize().strip()
         while iterateProduct == "":
-            iterateProduct = input(f"Error: El campo no puede estar vacio. Ingrese el producto que desea {iterate}: ").strip()
+            iterateProduct = input(f"Error: El campo no puede estar vacio. Ingrese el producto que desea {iterate}: ").lower().capitalize().strip()
         for product in products:
             if product["product"] == iterateProduct:
                 print(f"El producto {iterateProduct} se ha encontrado: ")

@@ -13,7 +13,7 @@ def menu ():
     "1: Añadir producto.\n " \
     "2: Buscar producto.\n " \
     "3: Actualizar precio de producto.\n " \
-    "4: Eliminar libros del catalogo.\n " \
+    "4: Eliminar producto del catalogo.\n " \
     "5: Valor total del inventario.\n " \
     "6: Salir.\n")
     print("-"*40)
@@ -32,7 +32,7 @@ def valueValidation (cantValue):
 #This funtion is used to validate the product list and create a new product. if a product is entered by the first time you have to enter five product.       
 def addProduct():
     while True:
-        print("\n""-"*10,"Añadir nuevo producto","-"*10,"\n")
+        print("\n","-"*10,"Añadir nuevo producto","-"*10,"\n")
         nameProduct = input("Ingrese el nombre del producto agregar: ").strip().lower().capitalize()
         while nameProduct == "":
             nameProduct = input("Error: Ingrese el nombre del producto agregar: ").strip().lower().capitalize()
@@ -82,13 +82,17 @@ def   searchModifyOrDeleteProduct (option,txtOption):
                     print(f"No se {txtOption} el producto.\n")
                     return            
             else: #Here its executed the fourth option (Delete product)
-                option1 = input(f"Esta seguro que desea {txtOption} el producto {product["nameProduct"]}? \n\nIngrese 1: Para {txtOption} o Ingrese: Cualquier tecla para volver al menu:")
-                if option1 == "1":
-                    productInventoryList.remove(product)
-                    print(f"\n¡¡¡El producto {product['nameProduct']} se ha eliminado correctamente!!!\n")
-                    return
+                if product["productQuantity"] == 0:
+                    option1 = input(f"Esta seguro que desea {txtOption} el producto {product["nameProduct"]}? \n\nIngrese 1: Para {txtOption} o Ingrese: Cualquier tecla para volver al menu:")
+                    if option1 == "1":
+                        productInventoryList.remove(product)
+                        print(f"\n¡¡¡El producto {product['nameProduct']} se ha eliminado correctamente!!!\n")
+                        return
+                    else:
+                        print(f"No se {txtOption} el producto.\n")
+                        return
                 else:
-                    print(f"No se {txtOption} el producto.\n")
+                    print(f"El producto {product['nameProduct']} no se puede eliminar por que tiene aun hay existencia en el inventario.")
                     return
     print(f"\n¡¡¡El producto {nameProduct} no se ha encontrado en el inventario!!!")     
         
@@ -126,11 +130,11 @@ def main ():
                     print("\n","-"*13,"Valor total del inventario","-"*13,"\n")
                     valueInventory()
                 case 6:
-                    print("\n","-"*13,"Fin del programa","-"*13,"\n")
                     break
                 case _:
                     print("\n¡¡¡Ingeso una opción incorrecta.!!!")
         except ValueError:
             print("¡¡¡Ingreso un valor no numerico.!!!")
-                      
+    print("="*15," FIN DEL PROGRAMA ","="*15)     
+              
 main()

@@ -33,14 +33,18 @@ Puedes seleccionar unas de las siguientes opciones para interactuar con el progr
 - Se solicita el nombre del producto al usuario, valida que no ingrese campos vacios y que el producto ingresado no este en el inventario.
 - Se solicita el precio del producto, la cantidad y valida que los datos ingresados sean numeros positvos.
 - El programa añade los productosal inventario, para cuando el usuario no quiere ingresar mas productos y vuelve al menu.
+  
   ![imagen](https://github.com/user-attachments/assets/667db5be-973f-4422-8725-b8e228dfb11b)
+  
 - El programa no deja avanzar si se ingresan valores negativos
+  
   ![imagen](https://github.com/user-attachments/assets/e2768367-2790-4e5c-86c7-e92759e2ca34)
 
 
 **Opción 2: Buscar productos en el inventario.**
 - Primero se solicita que ingrese un producto a buscar, se valida la entrada de dato, y se valida que el producto este creado en el inventario.
 - Muestra los detalles del producto como los son nombre, precio por unidad, cantidad y precio total de todas la unidades.
+- 
 ![imagen](https://github.com/user-attachments/assets/9cb73812-369c-456e-abaa-6dd8f14011e4)
 
 
@@ -54,18 +58,22 @@ Puedes seleccionar unas de las siguientes opciones para interactuar con el progr
 - Primero se solicita que ingrese el producto que desea eliminar, se valida la entrada de dato, y se valida que el producto este creado en el inventario.
 - Se valida que el producto ingresado es el que se desea eliminar.
   ![imagen](https://github.com/user-attachments/assets/115154e5-eedf-4788-bbef-efd8357b2be3)
+  
 - El programa solo deja eliminar productos sin existencia en el inventario, si se intenta eliminar unos con existencia este le informara que no se puede eliminar.
+  
   ![imagen](https://github.com/user-attachments/assets/a72ca1e4-ecbc-4fec-8173-f9943bacf61c)
 
 
 **Opción 5: Calcular el valor total de los productos en inventario.**
 - El programa toma la cantidad de cada producto y la multiplica por su precio individual.
 - Suma todos los resultados de cada priducto e imprime el resultado de el valor total de los productos en inventario.
+  
   ![imagen](https://github.com/user-attachments/assets/ec71f1f9-d0ec-448b-b274-9b9570671e83)
 
 
 **Opción 6: Salir del programa.**
 - Se usa para salir del programa
+  
 ![imagen](https://github.com/user-attachments/assets/09ca44ec-b575-4c13-bbfa-38c8e7f64772)
 
 

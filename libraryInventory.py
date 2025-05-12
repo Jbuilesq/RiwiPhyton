@@ -37,35 +37,48 @@ def selectGenre ():
             print("Ingresaste un valor incorrecto.")            
             
 
-def addBook ():
-    nameBook = input("Ingrese el titulo del libro: ")
-    authorBook = input("ingrese el autor del libro: ")
-    numberOfCopie = int(input("Ingrese el numero de copias: "))
+def addBook ():#falta validación de libro existente
+    nameBook = input("Ingrese el titulo del libro: ") #falta validacion de campo vacio
+    authorBook = input("ingrese el autor del libro: ")#falta validacion de campo vacio
+    numberOfCopie = int(input("Ingrese el numero de copias: "))#falta validación de numeros positivos
     bookGenre = selectGenre()
-    bookLoan = int(input("Ingrese el numero de copias prestadas: "))
+    bookLoan = 0
     bookInventory.append({"bookTitle":nameBook,"authorBook":authorBook,"numberOfCopies":numberOfCopie,"bookGenre":bookGenre,"bookLoan":bookLoan})
 
-def book():
-    searchBook = input("Ingrese el libro que desea buscar: ")
+def book(option,txtOption):
+    searchBook = input(f"Ingrese el libro que desea {txtOption}: ")
     for book in bookInventory:
         if book["bookTitle"] == searchBook:
-            print("El libro se ha encontrado")
-            return
-    print("El libro no fue encontrado: ")
-
-def booksLoan():
-    searchBook = input("Ingrese el libro que desea prestar: ")
-    for book in bookInventory:
-        if book["bookTitle"] == searchBook:
-            print(book["bookTitle"],book["numberOfCopies"],book["bookLoan"])
-            print(type(book["bookTitle"],book["numberOfCopies"],book["bookloan"]))
-            if book["bookloan"] != 0:#book["numberOfCopies"]:
-                print("El libro tiene copias disponibles")
-                book["bookLoan"] += 1
-                print(f"numero de copias disponibles {book["numberOfCopies"]-book["bookLoan"]}")
+            print(f"El libro {book['bookTitle']} se ha encontrado.")
+            if option == 2:
+                print(f"Autor: {book['authorBook']} | Copias disponibles: {book['numberOfCopies'] -book['bookLoan']} | Genero: {book['bookGenre']} | Copias prestadas: {book['bookLoan']}")
                 return
-            else:
-                print("No hay copias disponibles para prestamo: ")
+            elif option == 3:
+                if book["bookLoan"] == book["numberOfCopies"]:
+                    print("No hay copias disponibles para prestamo: ")
+                    return
+                else:
+                    book["bookLoan"] += 1
+                    print("El libro se ha prestado correctamente.")
+                    print(f"Copias disponibles: {book['numberOfCopies']-book['bookLoan']}.")
+                    return
+            elif option == 4:
+                if (book["numberOfCopies"] - book["bookLoan"]) == book["numberOfCopies"]:
+                    print(f"El libro {book['bookTitle']} no registra copias prestadas.")
+                    return
+                else:
+                    print(f"La copia del libro {book['bookTitle']} se devolvio correctamente.")
+                    book["bookLoan"] -= 1
+                    print(f"Copias disponibles: {book['numberOfCopies']-book['bookLoan']}.")
+                    return
+            elif option == 5:
+                if (book["numberOfCopies"] - book["bookLoan"]) == book["numberOfCopies"]:
+                    print(f"El libro {book['bookTitle']} se ha elminado correctamente.")
+                    bookInventory.remove(book)
+                    return
+                else:
+                    print(f"El libro {book['bookTitle']} no se puede eliminar ya que tiene copias prestadas. ")
+                    return
     print("El libro no fue encontrado: ")
 
 
@@ -94,20 +107,21 @@ def main ():
                     addBook()
                 case 2:  
                     print("\n","-"*10," BUSCAR LIBROS POR TITULO ","-"*10,"\n") #Permitir consultar los detalles de un libro por su título (autor, copias disponibles, género).
-                    book()
-                    print(literaryGenre)
-                    print(bookInventory)
+                    book(option,"buscar")
                 case 3:
-                    booksLoan()
                     print("\n","-"*10," REGISTRAR PRESTAMO DE LIBRO ","-"*10,"\n") #Disminuir en 1 la cantidad de copias disponibles al registrar un préstamo. Validar que haya copias disponibles antes de prestarlo.
+                    book(option,"prestar")
                 case 4:
                     print("\n","-"*10," DEVOLVER LIBRO ","-"*10,"\n")#Aumentar en 1 la cantidad de copias disponibles al registrar una devolución.
+                    book(option,"devolver")
                 case 5:
                     print("\n","-"*10," ELIMINAR LIBROS DEL CATALOGO ","-"*10,"\n") # Permitir eliminar libros si no tienen copias prestadas (cantidad = total original).
+                    book(option,"eliminar")
                 case 6:
                     print("\n","-"*10," LISTA DE LIBROS POR GENERO  ","-"*10,"\n") #Mostrar todos los libros disponibles de un género específico.
                 case 7:
                     print("\n","-"*10," MOSTRAR INVENTARIO ","-"*10,"\n") #Indicar cuántos libros hay en total y cuántas copias en total están disponibles en la biblioteca.
+                    print(bookInventory)
                 case 8:
                     print("\n","-"*10," SALIR ","-"*10,"\n")
                     break

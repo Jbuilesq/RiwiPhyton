@@ -106,6 +106,9 @@ def valueInventory ():
     for product in productInventoryList:
         print(f"Producto: {product['nameProduct']} | Precio: ${product['priceProduct']:.2f} | Cantidad: {product['productQuantity']} | Precio total: {multiplyProduct(product['priceProduct'],product['productQuantity']):.2f}")
         valueProducts.append(multiplyProduct(product["priceProduct"],product["productQuantity"]))
+
+    # [print(f"Prueba de for : {p['nameProduct']}") for p in productInventoryList]
+    # [print(f"Prueba de for : {a['nameProduct']}") sum(a["productQuantity"]*a["priceProduct"]) for a in productInventoryList]
     print(f"\nEl valor total del inventario es de: ${sum(valueProducts):.2f}")
         
 #This function is used to validate the menu options
